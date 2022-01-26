@@ -1,0 +1,40 @@
+---
+# Ansible playbook. To run it with ansible, do:
+# ansible-playbook playbook.yml -i "localhost,"
+  - name: "Process the templates in the proxies folder and output to build"
+    hosts: 
+      - localhost
+    connection: local 
+    vars:
+      DEPLOYED_VERSION: '1.1'
+      RELEASE_RELEASEID: '20220125'
+      SOURCE_COMMIT_ID: 47bba67
+      NUM_RANDOM_LONG_INTS_FOR_STATE: '5'
+      RATELIMITING:
+        dhewapim-service-name:
+          quota:
+            enabled: false
+          spikeArrest:
+            enabled: false
+      VARIABLES_KVM: identity_service_config
+      ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+      ENCRYPTED_VARIABLES_KVM_KEY_CLIENT_SECRET: super-secret-secret
+      IDENTITY_PROVIDER_CIS2: cis2
+      IDENTITY_PROVIDER_NHS_LOGIN: nhs-login
+      SERVICE_BASE_PATH: nhs-digital-id-copy
+
+    tasks:
+    - name: Create directories
+      file:
+        path: ./build/{{ item.path }}
+        state: directory
+        mode: '{{ item.mode }}'
+      with_filetree: proxies/
+      when: item.state == 'directory'
+      
+    - name: Template files (explicitly skip directories in order to use the 'src' attribute)
+      template:
+        src: '{{ item.src }}'
+        dest: ./build/{{ item.path }}
+      with_filetree: proxies/
+      when: item.state == 'file'
