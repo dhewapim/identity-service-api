@@ -12,6 +12,6 @@
       <StatusCode>400</StatusCode>
       <ReasonPhrase>Bad Request</ReasonPhrase>
     </Set>
-    <AssignTo createNew="false" transport="https" type="request"/>
+    <AssignTo createNew="false" transport="http" type="request"/>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
 </AssignMessage>

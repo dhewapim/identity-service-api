@@ -6,4 +6,7 @@
   <CacheResource>client-state</CacheResource>
   <Scope>Exclusive</Scope>
   <Source>request.formparam.auth_method</Source>
+  <ExpirySettings>
+      <TimeoutInSeconds>600</TimeoutInSeconds>
+  </ExpirySettings>
 </PopulateCache>

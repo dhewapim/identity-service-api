@@ -21,7 +21,7 @@
       ENCRYPTED_VARIABLES_KVM_KEY_CLIENT_SECRET: super-secret-secret
       IDENTITY_PROVIDER_CIS2: cis2
       IDENTITY_PROVIDER_NHS_LOGIN: nhs-login
-      SERVICE_BASE_PATH: nhs-digital-id-copy
+      SERVICE_BASE_PATH: /nhs-digital-id-copy
 
     tasks:
     - name: Create directories
